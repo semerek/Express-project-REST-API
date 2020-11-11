@@ -1,0 +1,14 @@
+{
+  "name": "Expressapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Marta S.",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "4.17.1"
+  },
+  "scripts": {
+    "start": "nodeman server.js"
+  }
+}
