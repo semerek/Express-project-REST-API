@@ -17,3 +17,5 @@ const db = {
         { id: 6, day: 2, seat: 2, client: 'Molier Lo Celso', email: 'moiler.lo.celso@example.com' },
     ]
 }
+
+module.exports = db;
