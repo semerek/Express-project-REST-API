@@ -13,6 +13,8 @@
     "start": "nodemon server.js"
   },
   "devDependencies": {
-    "socket.io": "^3.0.3"
+    "socket.io": "^3.0.3",
+    "uuid": "^8.3.1",
+    "uuid-v4": "^0.1.0"
   }
 }

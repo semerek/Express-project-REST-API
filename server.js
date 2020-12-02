@@ -1,14 +1,26 @@
 const express = require('express');
 const app = express()
 const socket = require('socket.io');
+const path = require("path");
+
 
 
 const cors = require('cors');
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 // import routes
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
+
+app.use(express.static(path.join(__dirname + "/client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
