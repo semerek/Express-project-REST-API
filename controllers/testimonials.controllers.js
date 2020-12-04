@@ -44,8 +44,8 @@ exports.getRandom = async (req, res) => {
 exports.addNew = async (req, res) => {
 
   try {
-    const { id, author, text } = req.body;
-    const newTestimonial = new Testimonial({ id: id, author: author, text: text });
+    const { author, text } = req.body;
+    const newTestimonial = new Testimonial({ author: author, text: text });
     await newTestimonial.save();
     res.json({ message: 'OK' });
 
@@ -57,11 +57,11 @@ exports.addNew = async (req, res) => {
 //PUT /testimonials/:id – modyfikacja wpisu o danym id na bazie req.body otrzymanego od części frontendowej.
 exports.updateById = async (req, res) => {
 
-  const { id, author, text } = req.body;
+  const { author, text } = req.body;
   try {
     const tes = await (Testimonial.findById(req.params.id));
     if (tes) {
-      await Testimonial.updateOne({ _id: req.params.id }, { $set: { id: id, author: author, text: text } });
+      await Testimonial.updateOne({ _id: req.params.id }, { $set: { author: author, text: text } });
       res.json({ message: 'OK' });
     }
     else res.status(404).json({ message: 'Not found...' });

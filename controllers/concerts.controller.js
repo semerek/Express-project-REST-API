@@ -26,8 +26,8 @@ exports.getById = async (req, res) => {
 exports.addNew = async (req, res) => {
 
   try {
-    const { id, performer, genre, price, day, image } = req.body;
-    const newConcert = new Concert({ id: id, performer: performer, genre: genre, price: price, day: day, image: image });
+    const { performer, genre, price, day, image } = req.body;
+    const newConcert = new Concert({ performer: performer, genre: genre, price: price, day: day, image: image });
     await newConcert.save();
     res.json({ message: 'OK' });
 
@@ -38,11 +38,11 @@ exports.addNew = async (req, res) => {
 
 exports.updateById = async (req, res) => {
 
-  const { id, performer, genre, price, day, image } = req.body;
   try {
+    const { performer, genre, price, day, image } = req.body;
     const con = await (Concert.findById(req.params.id));
     if (con) {
-      await Concert.updateOne({ _id: req.params.id }, { $set: { id: id, performer: performer, genre: genre, price: price, day: day, image: image } });
+      await Concert.updateOne({ _id: req.params.id }, { $set: { performer: performer, genre: genre, price: price, day: day, image: image } });
       res.json({ message: 'OK' });
     }
     else res.status(404).json({ message: 'Not found...' });
