@@ -16,7 +16,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
 
   try {
-    const tes = await Testimonial.findById(req.params.id);
+    const tes = await Testimonial.findOne({_id: req.params.id});
     if (!tes) res.status(404).json({ message: 'Not found' });
     else res.json(tes);
   }
@@ -59,7 +59,7 @@ exports.updateById = async (req, res) => {
 
   const { author, text } = req.body;
   try {
-    const tes = await (Testimonial.findById(req.params.id));
+    const tes = await Testimonial.findOne({_id: req.params.id});
     if (tes) {
       await Testimonial.updateOne({ _id: req.params.id }, { $set: { author: author, text: text } });
       res.json({ message: 'OK' });

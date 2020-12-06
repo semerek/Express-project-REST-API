@@ -14,9 +14,9 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
 
   try {
-    const sea = await Seat.findById(req.params.id);
+    const sea = await Seat.findOne({_id: req.params.id});
     if (!sea) res.status(404).json({ message: 'Not found' });
-    else res.json(con);
+    else res.json(sea);
   }
   catch (err) {
     res.status(500).json({ message: err });
@@ -26,8 +26,8 @@ exports.getById = async (req, res) => {
 exports.addNew = async (req, res) => {
 
   try {
-    const { day, seat, client, email } = req.body;
-    const newSeat = new Seat({ day: day, seat: seat, client: client, email: email });
+    const {day, seat, client, email } = req.body;
+    const newSeat = new Seat({day: day, seat: seat, client: client, email: email });
     await newSeat.save();
     res.json({ message: 'OK' });
 
@@ -41,8 +41,8 @@ exports.updateById = async (req, res) => {
   const { day, seat, client, email } = req.body;
 
   try {
-    const sea = await (Seat.findById(req.params.id));
     if (sea) {
+      const sea = await Seat.findOne({_id: req.params.id});
       await Seat.updateOne({ _id: req.params.id }, { $set: {day: day, seat: seat, client: client, email: email } });
       res.json({ message: 'OK' });
     }

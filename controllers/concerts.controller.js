@@ -14,7 +14,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
 
   try {
-    const con = await Concert.findById(req.params.id);
+    const con = await Concert.findOne({_id: req.params.id});
     if (!con) res.status(404).json({ message: 'Not found' });
     else res.json(con);
   }
@@ -40,7 +40,7 @@ exports.updateById = async (req, res) => {
 
   try {
     const { performer, genre, price, day, image } = req.body;
-    const con = await (Concert.findById(req.params.id));
+    const con = await Concert.findOne({_id: req.params.id});
     if (con) {
       await Concert.updateOne({ _id: req.params.id }, { $set: { performer: performer, genre: genre, price: price, day: day, image: image } });
       res.json({ message: 'OK' });
