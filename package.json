@@ -1,17 +1,22 @@
 {
-  "name": "Expressapi",
+  "name": "express-api",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Marta S.",
   "license": "MIT",
   "dependencies": {
+    "chai": "4.2.0",
+    "chai-http": "4.3.0",
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "mocha": "6.2.1",
     "mongoose": "5.7.1",
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "mocha --timeout 15000 \"test/**/*.test.js\"",
+    "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
   "devDependencies": {
     "socket.io": "^3.0.3",
