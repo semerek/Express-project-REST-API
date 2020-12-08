@@ -1,4 +1,6 @@
 const Testimonial = require('../models/testimonial.model');
+var sanitize = require('mongo-sanitize');
+
 
 
 //GET /testimonials – zwracanie całej listy wpisów
@@ -44,7 +46,8 @@ exports.getRandom = async (req, res) => {
 exports.addNew = async (req, res) => {
 
   try {
-    const { author, text } = req.body;
+    const clean = sanitize(req.body);
+    const { author, text } = clean
     const newTestimonial = new Testimonial({ author: author, text: text });
     await newTestimonial.save();
     res.json({ message: 'OK' });

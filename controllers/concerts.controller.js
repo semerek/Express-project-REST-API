@@ -1,6 +1,5 @@
 const Concert = require('../models/concert.model');
 
-
 exports.getAll = async (req, res) => {
 
   try {
